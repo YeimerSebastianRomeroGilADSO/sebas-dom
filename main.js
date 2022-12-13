@@ -1,21 +1,22 @@
-addEventListener("DOMContentLoaded", (e) =>{
-    let validar = document.querySelector('#validacion')
-    let form = document.querySelector('#numeroPerfecto')
-    let acum = 0;
-    form.addEventListener('submit', (e) => {
+addEventListener("DOMContentLoaded", (e) => {
+    let form = document.querySelector('#proceso');
+    let total = document.querySelector('#sueldoTotal')
+    let ventasPorc = 0;
+    let sueldoTotal = 0;
+
+    form.addEventListener('submit', (e)=>{
         e.preventDefault();
-        let  dataInput = Object.fromEntries(new FormData(e.target))
-        let  num = dataInput.number 
-        for(let i=1; i <= num / 2; i++){
-            if (num % i == 0){
-                acum +=i;
-            }
-        }
-            if (acum !=0 && acum == num){
-                validar.innerHTML = 'Es un numero perfecto'
-        }
-            else {
-                    validar.innerHTML = 'No es un numero perfecto'
-        }
+        let dataInput = Object.fromEntries(new FormData(e.target))
+        let sueldoBase = Number(dataInput.sueldoBase)
+        let ventaUno = Number(dataInput.ventaUno)
+        let ventaDos = Number(dataInput.ventaDos)
+        let ventaTres = Number(dataInput.ventaTres)
+        total = dataInput.enviar
+        ventasPorc= (ventaUno+ventaDos+ventaTres)*0.10
+        sueldoTotal = sueldoBase+ventasPorc
+        console.log(sueldoTotal)
+        enviarUno.innerHTML = 'Su parte por comisiones de ventas realizadas es de ' + ventasPorc
+        enviarDos.innerHTML = 'Su sueldo toial es de ' + sueldoTotal
+
     })
-})  
+})
